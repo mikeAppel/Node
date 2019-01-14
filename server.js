@@ -1,19 +1,39 @@
-var express =require('express');
+const express = require('express');
+const port = 3000;
+const http = require('http');
+const app = express();
+const server = http.createServer(app).listen(port);
+const io = require('socket.io')(server);
 
-var app = express();
+var postMessage = [];
 
-var port=process.env.PORT || 3000;
+app.use(express.static("./public"));
 
-app.use(express.static(__dirname + '/public'));
 
-app.get('/',function(req,res){
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+};
 
-console.log('hello from server');
+io.on("connection", function (socket) {
 
- res.render('./public/index.html');
+    function sendData() {
+        socket.emit("message", getRandomInt(75, 95));
+    };
+
+    setInterval(sendData, 1000);
+
+    socket.on("chat", function (message) {
+        socket.broadcast.emit("message", message);
+    });
+
+    socket.on("postMessage", function (message) {
+        postMessage.push(message);
+        console.log(postMessage);
+        socket.broadcast.emit("postMessage", message);
+    });
 
 });
 
-app.listen(port);
-
-console.log('Server Listening at port '+port);
+console.log("Server running...");

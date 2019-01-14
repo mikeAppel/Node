@@ -1,158 +1,27 @@
-
-><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BSE * MES</title>
     <link rel="stylesheet" href="style/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css"/>
 
-    <script src="scripts/jscolor.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>
-    <script src="scripts/testscript.js"></script>
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="scripts/socket.io-client.min.js"></script>
+    <script src="scripts/mainscript.js"></script>
+
 </head>
-<body onload="init()">
 
-    <div class="header">
-      <h2>Header</h2>
+<body>
+    <div id="messageContainer" class="contentContainer">
     </div>
-
-    <div class="navigationBar">
-        <div class="linkContainer" id="btnCreateNode">Create Machine</div>
-        <div class="linkContainer" id="btnSetAlarm">Set Alarm</div>
-    </div>
-    
-    <div class="row">
-      <div class="column side">
-        <h3>Navigation</h3>
-        <div id="navigationContainer">
-          <div id="navigationTree">
-            <div id="nodeMachine1" onclick="changeDataset(this.id)" class="navigationElement">Maschine 1</div>
-            <div id="nodeMachine2" onclick="changeDataset(this.id)" class="navigationElement">Maschine 2</div>
-            <div id="nodeMachine3" onclick="changeDataset(this.id)" class="navigationElement">Maschine 3</div>
-            <div id="nodeMachine4" onclick="changeDataset(this.id)" class="navigationElement">Maschine 4</div>
-            <div id="nodeMachine5" onclick="changeDataset(this.id)" class="navigationElement">Maschine 5</div>
-          </div>
-        </div>
-      </div>
-
-        <div class="column middle">
-            <div>
-                <button id="startBox">Start fullscreen</button>
-            </div>
-
-          <div id="infoContainer">
-            <table id="tblMachineParameter">
-              <tr>
-                  <th colspan="4">Machine Parameters</th>
-                  <th colspan="3">Engine Parameters</th>
-              </tr>
-              <tr>
-                  <th>Name</th>
-                  <th>ID</th>
-                  <th>Temperature</th>
-                  <th>Runtime</th>
-                  <th>Current Power </th>
-                  <th>Total Operating Time</th>
-                  <th>Last Service</th>
-              </tr>
-              <tr>
-                  <td><div id="machineName"></div></td>
-                  <td><div id="machineID"></div></td>
-                  <td><div id="machineTemperature"></div></td>
-                  <td><div id="machineRuntime"></div></td>
-                  <td><div id="enginePower"></div></td>
-                  <td><div id="engineOperationTime"></div></td>
-                  <td><div id="engineLastService"></div></td>
-              </tr>
-            </table>
-          </div>
-
-          <div id="tempChartContainer" class="chartContainer">
-              <canvas id="canvasTempChart" height="auto" width="auto"></canvas>
-          </div>
-          <div id="performanceChartContainer" class="chartContainer">
-              <canvas id="canvasPerformanceChart" height="auto" width="auto"></canvas>
-          </div>
-        </div>
-        <div class="column side">
-            <h3>Dashboard Properties</h3>
-            <div>
-              <table id="tblSettings">
-                <tr>
-                    <th colspan="2">Display Charts</th>
-                </tr>
-                <tr>
-                    <td>Temperature</td>
-                    <td><input type="checkbox" name="displayTempChart" id="cbDisplayTempChart"></td>
-                </tr>
-                <tr>
-                    <td>Performance</td>
-                    <td><input type="checkbox" name="displayPerformanceChart" id="cbDisplayPerformanceChart"></td>
-                </tr>
-                <tr>
-                    <th colspan="2">Temperature Chart Settings</th>
-                </tr>
-                <tr>
-                    <td>Chart Color</td>
-                    <td>
-                      <input id="colorPicker" 
-                            class="jscolor {onFineChange:'update(this)', closable:true, closeText:'OK'}" value="localStorage.lsChartColor">
-                      <button id="btnSetLineColor">set</button>
-                    </td>
-                </tr>
-                <tr>
-                  <td>Alert-Level</td>
-                  <td><div id="alertLevel"></div></td>
-              </tr>
-              </table>
-            </div>
-       </div>
-
-  <div id="modalBox" class="modal">
-    <div class="modalContent">
-      <h1>Settings of temperature alert</h1>
-      <p>Type in alert-level:</p>
-      <input type="number" id="inputAlarmLevel"><button id="btnSubmitAlarmLevel">submit</button>
-    </div>
-  </div>
-
 </body>
+
 <script>
 
-setInterval(updateData,1000);
-initTimeLine();
-drawTempChart();
-drawPerformanceChart();
-
-document.getElementById("cbDisplayTempChart").addEventListener("click", function(){
-  manageChartAppearance(this,"tempChartContainer");
-});
-
-document.getElementById("cbDisplayPerformanceChart").addEventListener("click", function(){
-  manageChartAppearance(this, "performanceChartContainer");
-});
-
-document.getElementById("btnSetLineColor").addEventListener("click", function(){
-    setColors();
-});
-
-document.getElementById("btnSetAlarm").addEventListener("click", function(){
-    openModal(); 
-});
-
-document.getElementById("btnSubmitAlarmLevel").addEventListener("click", function(){
-    closeModal();
-});
-
-document.getElementById("startBox").addEventListener("click", function(){
-    openFullscreen("tempChartContainer");
-});
-
-
-
-
 </script>
+
 </html>
