@@ -4,7 +4,7 @@
   "description": "BSE project",
   "main": "server.js",
   "scripts": {
-    "start": "open http://localhost:3000 & node server.js"
+    "start": "node server.js"
   },
   "keywords": [
     "Socket",
