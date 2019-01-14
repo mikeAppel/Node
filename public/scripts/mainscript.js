@@ -1,6 +1,5 @@
 var socket = io("localhost:3000");
 
-
 socket.on("postMessage", function (obj) {
     let message = obj.text;
     let author = obj.author;
