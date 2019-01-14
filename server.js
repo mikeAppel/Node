@@ -30,10 +30,10 @@ io.on("connection", function (socket) {
 
     socket.on("postMessage", function (message) {
         postMessage.push(message);
-        console.log(postMessage);
+        //console.log(postMessage);
         socket.broadcast.emit("postMessage", message);
     });
 
 });
 
-console.log("Server running...");
+//console.log("Server running...");
