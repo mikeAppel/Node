@@ -1,4 +1,4 @@
-var socket = io("https://machine-27.azurewebsites.net:8080");
+var socket = io("https://machine-27.azurewebsites.net:443");
 
 socket.on("postMessage", function (obj) {
     let message = obj.text;
