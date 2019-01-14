@@ -1,4 +1,4 @@
-var socket = io("https://bse-machine-ui.azurewebsites.net:8080");
+var socket = io("https://bse-machine-ui.azurewebsites.net:3000");
 
 
 socket.on("postMessage", function (obj) {
