@@ -1,4 +1,4 @@
-var socket = io("localhost:3000");
+var socket = io("localhost:8080");
 
 socket.on("postMessage", function (obj) {
     let message = obj.text;
