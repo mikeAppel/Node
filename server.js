@@ -22,7 +22,7 @@ io.on("connection", function (socket) {
         socket.emit("message", getRandomInt(75, 95));
     };
 
-    setInterval(sendData, 1000);
+    setInterval(sendData, 7000);
 
     socket.on("chat", function (message) {
         socket.broadcast.emit("message", message);
