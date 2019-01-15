@@ -33,7 +33,6 @@ io.on("connection", function (socket) {
         //console.log(postMessage);
         socket.broadcast.emit("postMessage", message);
     });
-
 });
 
 //console.log("Server running...");
